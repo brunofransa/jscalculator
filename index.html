@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora JS</title>
+</head>
+<body>
+    <h1>Calculadora</h1>
+    <p>Insira o primeiro número:
+        <input type="text" id="inNumero1">
+    </p>
+    <p>Insira o segundo número:
+        <input type="text" id="inNumero2">
+    </p>
+    <h2>Escolha a operação desejada:</h2>
+    <p>
+        <input type="radio" name="adicao" id="rbAdicao"> + (Adição)
+    </p>
+    <p>
+        <input type="radio" name="adicao" id="rbSubtracao"> - (Subtração)
+    </p>
+    <p>
+        <input type="radio" name="adicao" id="rbMultiplicao"> * (Multiplicação)
+    </p>
+    <p>
+        <input type="radio" name="adicao" id="rbDivisao"> / (Divisão)
+    </p>
+    <p>
+    <h1 style="color: red;" id="outResposta"></h1>
+    </p>
+    <p>
+        <input type="button" value="Calcular" id="btCalcular">
+        <input type="button" value="Limpar/Nova Operação" id="btLimpar">
+    </p> 
+
+    <script>
+        function calcularNumeros(){
+            var inNumero1 = document.getElementById("inNumero1");
+            var inNumero2 = document.getElementById("inNumero2");
+            var rbAdicao = document.getElementById("rbAdicao");
+            var rbSubtracao = document.getElementById("rbSubtracao");
+            var rbMultiplicao = document.getElementById("rbMultiplicao");
+            var rbDivisao = document.getElementById("rbDivisao");
+            var outResposta = document.getElementById("outResposta");
+
+            var numero1 = Number(inNumero1.value);
+            var numero2 = Number(inNumero2.value);
+            var adicao = rbAdicao.checked;
+            var subtracao = rbSubtracao.checked;
+            var multiplicao = rbMultiplicao.checked;
+            var divisao = rbDivisao.checked;
+
+            if (numero1 == "" || numero2 == ""){
+                alert("Por favor, informe dois números.");
+                inNumero1.focus();
+                
+            }
+                  
+
+            if(isNaN(numero1) || isNaN(numero2)){
+                alert("Por favor, informe um número.");
+                inNumero1.focus();
+            }
+
+            if (divisao){
+                var resultadoDivisao = numero1 / numero2 + " ; o resto da divisão é: " + numero1 % numero2; 
+            } else if (adicao){
+                var resultadoAdicao = numero1 + numero2;
+            } else if (subtracao) {
+                var resultadoSubtracao = numero1 - numero2;
+            } else if (multiplicao){
+                var resultadoMultiplicacao = numero1 * numero2;
+            } else {
+                var vazio = alert("Por favor, informe ao menos uma operação a ser realizada.");
+            }
+
+            outResposta.textContent = resultadoAdicao || resultadoDivisao || resultadoMultiplicacao || resultadoSubtracao || vazio;
+        }
+
+        var btCalcular = document.getElementById("btCalcular");
+        btCalcular.addEventListener("click", calcularNumeros);
+
+        function limparCampos(){
+            location.reload();
+            document.getElementById("inNumero1", "inNumero2").focus();
+            
+        }
+
+        var btLimpar = document.getElementById("btLimpar");
+        btLimpar.addEventListener("click", limparCampos);
+    </script>
+
+    
+
+    
+        
+</body>
+</html>
